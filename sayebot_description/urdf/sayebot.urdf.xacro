@@ -9,14 +9,90 @@
             <geometry>
                 <mesh filename="package://sayebot_description/meshes/BaseReduced.dae"/>
             </geometry>
-            <origin xyz="0 -0.1371 0.0115" rpy="0 0 0"/>
+            <origin xyz="0.1371 0 0" rpy="0 0 ${pi/2}"/>
         </visual>
     </link>
 
     <joint name="base_joint" type="fixed">
         <parent link="base_footprint"/>
         <child link="base_link"/>
+        <origin xyz="0 0 0.0115" rpy="0 0 0"/>
+    </joint>
+
+    <link name="upper_link">
+        <visual>
+                <geometry>
+                        <mesh filename="package://sayebot_description/meshes/TopReduced.dae"/>
+                </geometry>
+                <origin xyz="0.1371 0 0" rpy="0 0 ${pi/2}"/>
+        </visual>
+    </link>
+
+    <joint name="upper_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="upper_link"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="right_forward_wheel_link">
+        <visual>
+                <geometry>
+                        <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
+                </geometry>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+        </visual>
+    </link>
+
+    <joint name="right_forward_wheel_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="right_forward_wheel_link"/>
+        <origin xyz="0.11 -0.1 0.0115" rpy="0 0 0"/>
+    </joint>
+
+    <link name="right_backward_wheel_link">
+        <visual>
+                <geometry>
+                        <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
+                </geometry>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+        </visual>
+    </link>
+
+    <joint name="right_backward_wheel_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="right_backward_wheel_link"/>
+        <origin xyz="-0.115 -0.1 0.0115" rpy="0 0 0"/>
+    </joint>
+
+    <link name="left_forward_wheel_link">
+        <visual>
+                <geometry>
+                        <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
+                </geometry>
+                <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
+        </visual>
+    </link>
+
+    <joint name="left_forward_wheel_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="left_forward_wheel_link"/>
+        <origin xyz="0.11 0.1 0.0115" rpy="0 0 0"/>
+    </joint>
+
+
+    <link name="left_backward_wheel_link">
+        <visual>
+                <geometry>
+                        <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
+                </geometry>
+                <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
+        </visual>
+    </link>
+
+    <joint name="left_backward_wheel_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="left_backward_wheel_link"/>
+        <origin xyz="-0.115 0.1 0.0115" rpy="0 0 0"/>
     </joint>
 
 </robot>
