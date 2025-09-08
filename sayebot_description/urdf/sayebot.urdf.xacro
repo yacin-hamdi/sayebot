@@ -9,7 +9,7 @@
             <geometry>
                 <mesh filename="package://sayebot_description/meshes/BaseReduced.dae"/>
             </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <origin xyz="0 -0.1371 0.0115" rpy="0 0 0"/>
         </visual>
     </link>
 
