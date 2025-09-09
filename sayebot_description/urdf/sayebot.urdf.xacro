@@ -11,6 +11,20 @@
             </geometry>
             <origin xyz="0.1371 0 0" rpy="0 0 ${pi/2}"/>
         </visual>
+
+        <visual>
+            <geometry>
+                    <mesh filename="package://sayebot_description/meshes/TopReduced.dae"/>
+            </geometry>
+            <origin xyz="0.1371 0 0" rpy="0 0 ${pi/2}"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <box size="0.3 0.09 0.12"/>
+            </geometry>
+            <origin xyz="-0.03 0 0.05" rpy="-${pi/2} 0 0"/>
+        </collision>
     </link>
 
     <joint name="base_joint" type="fixed">
@@ -19,20 +33,7 @@
         <origin xyz="0 0 0.0115" rpy="0 0 0"/>
     </joint>
 
-    <link name="upper_link">
-        <visual>
-                <geometry>
-                        <mesh filename="package://sayebot_description/meshes/TopReduced.dae"/>
-                </geometry>
-                <origin xyz="0.1371 0 0" rpy="0 0 ${pi/2}"/>
-        </visual>
-    </link>
-
-    <joint name="upper_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="upper_link"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-    </joint>
+    
 
     <link name="right_forward_wheel_link">
         <visual>
