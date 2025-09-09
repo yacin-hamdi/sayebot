@@ -4,6 +4,9 @@ from launch.actions import DeclareLaunchArgument
 from launch.substitutions import PathJoinSubstitution, LaunchConfiguration, Command
 from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
+from launch.conditions import IfCondition
+from ament_index_python.packages import get_package_share_directory
+import os
 
 def generate_launch_description():
 
@@ -16,8 +19,13 @@ def generate_launch_description():
             ])
     )
 
-    robot_description = ParameterValue(Command(["xacro ", LaunchConfiguration("robot_description")]), value_type=str)
+    use_joint_publisher_arg = DeclareLaunchArgument(
+        name="use_joint", 
+        default_value="true"
+    )
 
+    robot_description = ParameterValue(Command(["xacro ", LaunchConfiguration("robot_description")]), value_type=str)
+    use_joint_publisher = LaunchConfiguration("use_joint")
 
     robot_state_publisher = Node(
         package="robot_state_publisher",
@@ -30,7 +38,8 @@ def generate_launch_description():
 
     joint_state_publisher_gui = Node(
         package="joint_state_publisher_gui", 
-        executable="joint_state_publisher_gui"
+        executable="joint_state_publisher_gui",
+        condition=IfCondition(use_joint_publisher)
     )
 
 
@@ -38,10 +47,12 @@ def generate_launch_description():
         package="rviz2", 
         executable="rviz2", 
         name="rviz2", 
-        output="screen"
+        output="screen", 
+        arguments=["-d", os.path.join(get_package_share_directory("sayebot_description"), "rviz", "display.rviz")]
     )
 
     return LaunchDescription([
+        use_joint_publisher_arg,
         robot_description_arg,
         robot_state_publisher,
         joint_state_publisher_gui, 
