@@ -41,12 +41,20 @@
                 </geometry>
                 <origin xyz="0 -0.015 0" rpy="0 0 0"/>
         </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.0365" length="0.03"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+        </collision>
     </link>
 
-    <joint name="right_forward_wheel_joint" type="fixed">
+    <joint name="right_forward_wheel_joint" type="revolute">
         <parent link="base_link"/>
         <child link="right_forward_wheel_link"/>
         <origin xyz="0.11 -0.09 0.0115" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="5" lower="-0.5" upper="0.5" velocity="1.0"/>
     </joint>
 
     <link name="right_backward_wheel_link">
@@ -56,12 +64,19 @@
                 </geometry>
                 <origin xyz="0 -0.015 0" rpy="0 0 0"/>
         </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.0365" length="0.03"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+        </collision>
     </link>
 
-    <joint name="right_backward_wheel_joint" type="fixed">
+    <joint name="right_backward_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="right_backward_wheel_link"/>
         <origin xyz="-0.115 -0.09 0.0115" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
     </joint>
 
     <link name="left_forward_wheel_link">
@@ -71,12 +86,20 @@
                 </geometry>
                 <origin xyz="0 0.015 0" rpy="0 0 ${pi}"/>
         </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.0365" length="0.03"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+        </collision>
     </link>
 
-    <joint name="left_forward_wheel_joint" type="fixed">
+    <joint name="left_forward_wheel_joint" type="revolute">
         <parent link="base_link"/>
         <child link="left_forward_wheel_link"/>
         <origin xyz="0.11 0.09 0.0115" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="5" lower="-0.5" upper="0.5" velocity="1.0"/>
     </joint>
 
 
@@ -87,12 +110,19 @@
                 </geometry>
                 <origin xyz="0 0.015 0" rpy="0 0 ${pi}"/>
         </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.0365" length="0.03"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+        </collision>
     </link>
 
-    <joint name="left_backward_wheel_joint" type="fixed">
+    <joint name="left_backward_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="left_backward_wheel_link"/>
         <origin xyz="-0.115 0.09 0.0115" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
     </joint>
 
 </robot>
