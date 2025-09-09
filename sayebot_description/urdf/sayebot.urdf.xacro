@@ -5,6 +5,14 @@
     <link name="base_footprint"/>
 
     <link name="base_link">
+        <inertial>
+            <mass value="3.0" />
+            <inertia ixx="0.0054" ixy="0.0"     ixz="0.0"
+                                    iyy="0.0252" iyz="0.0"
+                                                    izz="0.0252" />
+            <origin xyz="0.0 0.0 0.038" rpy="0.0 0.0 0.0" />
+        </inertial>
+
         <visual>
             <geometry>
                 <mesh filename="package://sayebot_description/meshes/BaseReduced.dae"/>
@@ -23,7 +31,7 @@
             <geometry>
                 <box size="0.3 0.09 0.12"/>
             </geometry>
-            <origin xyz="-0.03 0 0.05" rpy="-${pi/2} 0 0"/>
+            <origin xyz="-0.03 0 0.06" rpy="0 0 0"/>
         </collision>
     </link>
 
@@ -36,11 +44,19 @@
     
 
     <link name="right_forward_wheel_link">
+        <inertial>
+            <mass value="0.05" />
+            <inertia ixx="0.00003331" ixy="0.0"     ixz="0.0"
+                                    iyy="0.0000204" iyz="0.0"
+                                                    izz="0.0000204" />
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        </inertial>
+
         <visual>
-                <geometry>
-                        <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
-                </geometry>
-                <origin xyz="0 -0.015 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
+            </geometry>
+            <origin xyz="0 -0.015 0" rpy="0 0 0"/>
         </visual>
         <collision>
             <geometry>
@@ -59,11 +75,19 @@
     </joint>
 
     <link name="right_backward_wheel_link">
+        <inertial>
+            <mass value="0.05" />
+            <inertia ixx="0.00003331" ixy="0.0"     ixz="0.0"
+                                    iyy="0.0000204" iyz="0.0"
+                                                    izz="0.0000204" />
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        </inertial>
+
         <visual>
-                <geometry>
-                        <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
-                </geometry>
-                <origin xyz="0 -0.015 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
+            </geometry>
+            <origin xyz="0 -0.015 0" rpy="0 0 0"/>
         </visual>
         <collision>
             <geometry>
@@ -81,11 +105,19 @@
     </joint>
 
     <link name="left_forward_wheel_link">
+        <inertial>
+            <mass value="0.05" />
+            <inertia ixx="0.00003331" ixy="0.0"     ixz="0.0"
+                                    iyy="0.0000204" iyz="0.0"
+                                                    izz="0.0000204" />
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        </inertial>
+
         <visual>
-                <geometry>
-                        <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
-                </geometry>
-                <origin xyz="0 0.015 0" rpy="0 0 ${pi}"/>
+            <geometry>
+                <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
+            </geometry>
+            <origin xyz="0 0.015 0" rpy="0 0 ${pi}"/>
         </visual>
         <collision>
             <geometry>
@@ -105,11 +137,19 @@
 
 
     <link name="left_backward_wheel_link">
+        <inertial>
+            <mass value="0.05" />
+            <inertia ixx="0.00003331" ixy="0.0"     ixz="0.0"
+                                    iyy="0.0000204" iyz="0.0"
+                                                    izz="0.0000204" />
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        </inertial>
+
         <visual>
-                <geometry>
-                        <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
-                </geometry>
-                <origin xyz="0 0.015 0" rpy="0 0 ${pi}"/>
+            <geometry>
+                <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
+            </geometry>
+            <origin xyz="0 0.015 0" rpy="0 0 ${pi}"/>
         </visual>
         <collision>
             <geometry>
