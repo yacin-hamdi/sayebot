@@ -125,6 +125,7 @@
             </geometry>
             <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
         </collision>
+        
     </link>
 
     <joint name="left_forward_wheel_joint" type="revolute">
