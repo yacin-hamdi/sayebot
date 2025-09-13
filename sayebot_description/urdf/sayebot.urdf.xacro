@@ -2,6 +2,8 @@
 
 <robot name="sayebot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+    <xacro:include filename="$(find sayebot_description)/urdf/sayebot_gazebo.xacro"/>
+
     <link name="base_footprint"/>
 
     <link name="base_link">
