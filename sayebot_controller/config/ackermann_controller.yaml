@@ -1,0 +1,22 @@
+controller_manager:
+  ros__parameters:
+    use_sim_time: true
+    update_rate: 50
+
+    sayebot_controller:
+      type: ackermann_steering_controller/AckermannSteeringController
+    
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+sayebot_controller:
+  ros__parameters:
+    type: ackermann_steering_controller/AckermannSteeringController
+    front_wheel_names: ["right_forward_wheel_joint", "left_forward_wheel_joint"]
+    rear_wheel_names: ["right_backward_wheel_joint", "left_backward_wheel_joint"]
+    steering_joint_names: ["right_forward_wheel_joint", "left_forward_wheel_joint"]
+
+    wheel_base: 1.0
+    track_width: 0.8
+    max_steering_angle: 0.5
+    max_speed: 2.0
