@@ -11,9 +11,14 @@ controller_manager:
 
 sayebot_controller:
   ros__parameters:
+    front_steering: true
+    open_loop: false
+    position_feedback: true
+    use_stamped_vel: true
+
     front_wheels_names: ["right_forward_steer_joint", "left_forward_steer_joint"]
     rear_wheels_names: ["right_backward_wheel_joint", "left_backward_wheel_joint"]
-    steering_wheels_names: ["right_forward_steer_joint", "left_forward_steer_joint"]
+    steering_wheels_names: ["right_forward_wheel_joint", "left_forward_wheel_joint"]
 
     wheelbase: 0.2255
     front_wheel_track: 0.2
@@ -23,6 +28,9 @@ sayebot_controller:
     wheel_separation: 0.2
     max_steering_angle: 0.5
     min_steering_angle: -0.5
+
+    steering_slow_down_factor: 1.5
+    angular_velocity_filter: 0.3
 
     enable_odom_tf: true
     odom_frame_id: odom

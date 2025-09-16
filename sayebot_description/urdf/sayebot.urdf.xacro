@@ -68,7 +68,17 @@
             <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
         </collision>
     </link>
-    <link name="right_forward_steer_link"/>
+    <link name="right_forward_steer_link">
+        <inertial>
+            <mass value="0.05" />
+            <inertia ixx="0.00003331" ixy="0.0"     ixz="0.0"
+                                    iyy="0.0000204" iyz="0.0"
+                                                    izz="0.0000204" />
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        </inertial>
+
+        
+    </link>
 
     <joint name="right_forward_steer_joint" type="revolute">
         <parent link="base_link"/>
@@ -139,7 +149,17 @@
         
     </link>
 
-    <link name="left_forward_steer_link"/>
+    <link name="left_forward_steer_link">
+        <inertial>
+            <mass value="0.05" />
+            <inertia ixx="0.00003331" ixy="0.0"     ixz="0.0"
+                                    iyy="0.0000204" iyz="0.0"
+                                                    izz="0.0000204" />
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        </inertial>
+
+    
+    </link>
 
     <joint name="left_forward_steer_joint" type="revolute">
         <parent link="base_link"/>
