@@ -33,8 +33,17 @@ def generate_launch_description():
         ])
     )
 
+    joystick = IncludeLaunchDescription(
+        PathJoinSubstitution([
+            FindPackageShare("sayebot_controller"),
+            "launch",
+            "joystick.launch.py"
+        ])
+    )
+
     return LaunchDescription([
         gazebo, 
         rviz,
-        controller
+        controller,
+        joystick
     ])
