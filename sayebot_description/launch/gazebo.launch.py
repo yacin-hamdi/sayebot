@@ -36,17 +36,7 @@ def generate_launch_description():
                    "-name", "sayebot"]
     )
 
-    rviz = IncludeLaunchDescription(
-        PathJoinSubstitution([
-            FindPackageShare("sayebot_description"), 
-            "launch", 
-            "display.launch.py"
-        ]), 
-        launch_arguments={
-            "use_joint": "false"
-        }.items()
-        
-    )
+    
 
     gz_ros2_bridge = Node(
         package="ros_gz_bridge", 
@@ -57,7 +47,6 @@ def generate_launch_description():
     )
     return LaunchDescription([
         gazebo_resource_path,
-        rviz, 
         gazebo, 
         gz_spawn_entity, 
         gz_ros2_bridge
