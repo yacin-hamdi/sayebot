@@ -21,7 +21,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file://models/aws_robomaker_racetrack_Wall_01/meshes/aws_Wall_01_visual.DAE</uri>
+              <uri>model://aws_robomaker_racetrack_Wall_01/meshes/aws_Wall_01_visual.DAE</uri>
               <scale>2.59853 2.59853 2.59853</scale>
             </mesh>
           </geometry>
@@ -43,7 +43,7 @@
           <pose frame=''>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file://models/aws_robomaker_racetrack_Wall_01/meshes/aws_Wall_01_collision.DAE</uri>
+              <uri>model://aws_robomaker_racetrack_Wall_01/meshes/aws_Wall_01_collision.DAE</uri>
               <scale>2.59853 2.59853 2.59853</scale>
             </mesh>
           </geometry>

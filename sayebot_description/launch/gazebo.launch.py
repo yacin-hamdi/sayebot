@@ -1,6 +1,6 @@
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable
-from launch.substitutions import PathJoinSubstitution, PythonExpression
+from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable, DeclareLaunchArgument
+from launch.substitutions import PathJoinSubstitution, PythonExpression, LaunchConfiguration
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.actions import Node
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -10,12 +10,28 @@ import os
 
 def generate_launch_description():
 
+    world_name_arg = DeclareLaunchArgument(
+        name="world_name",
+        default_value="racetrack_day"
+    )
+    world_name = LaunchConfiguration("world_name")
+
+    world_path = PathJoinSubstitution([
+        FindPackageShare("sayebot_description"),
+        "worlds", 
+        PythonExpression(["'", world_name, "'", " + '.world'"])
+    ])
+
+    
+    
 
     resource_path = str(Path(get_package_share_directory("sayebot_description")).parent.resolve())
+    resource_path += os.pathsep + os.path.join(get_package_share_directory("sayebot_description"), "models")
     gazebo_resource_path = SetEnvironmentVariable(
         name="GZ_SIM_RESOURCE_PATH", 
         value=resource_path
     )
+    print(resource_path)
 
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -25,7 +41,7 @@ def generate_launch_description():
                 "gz_sim.launch.py"
             ])
         ),
-        launch_arguments=[("gz_args", PythonExpression(["'-v 4 -r empty.sdf'"]))]
+        launch_arguments=[("gz_args", PythonExpression(["' -v 4 -r ", world_path, "'"]))]
     )
 
     gz_spawn_entity = Node(
@@ -46,6 +62,7 @@ def generate_launch_description():
         ]
     )
     return LaunchDescription([
+        world_name_arg,
         gazebo_resource_path,
         gazebo, 
         gz_spawn_entity, 
