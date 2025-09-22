@@ -35,7 +35,7 @@ def generate_launch_description():
 
     joystick = IncludeLaunchDescription(
         PathJoinSubstitution([
-            FindPackageShare("sayebot_controller"),
+            FindPackageShare("sayebot_teleop"),
             "launch",
             "joystick.launch.py"
         ])
