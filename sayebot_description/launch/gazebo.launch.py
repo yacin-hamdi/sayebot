@@ -12,7 +12,7 @@ def generate_launch_description():
 
     world_name_arg = DeclareLaunchArgument(
         name="world_name",
-        default_value="racetrack_day"
+        default_value="racetrack_day_empty"
     )
     world_name = LaunchConfiguration("world_name")
 
@@ -31,7 +31,6 @@ def generate_launch_description():
         name="GZ_SIM_RESOURCE_PATH", 
         value=resource_path
     )
-    print(resource_path)
 
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(

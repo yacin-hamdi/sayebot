@@ -24,11 +24,7 @@
             <uri>model://aws_robomaker_racetrack_Light_01/meshes/aws_Light_01_visual.DAE</uri>
           </mesh>
         </geometry>
-        <material>
-          <shader type='pixel'>
-            <normal_map>__default__</normal_map>
-          </shader>
-        </material>
+        
         <pose frame=''>0 0 0 0 -0 0</pose>
         <cast_shadows>1</cast_shadows>
         <transparency>0</transparency>

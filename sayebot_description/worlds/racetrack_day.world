@@ -3,7 +3,7 @@
 <sdf version="1.6"> 
   <world name="default"> 
     <!-- override the default position of the camera -->
-    <gui>
+    <!-- <gui>
       <camera name='gzclient_camera'>
         <pose>36.00 -27.95 24.67 0.00 0.53 2.376</pose>
       </camera>
@@ -27,37 +27,90 @@
       <longitude_deg>0</longitude_deg>  
       <elevation>0</elevation>  
       <heading_deg>0</heading_deg> 
-    </spherical_coordinates>  
+    </spherical_coordinates>   -->
     <model name="aws_robomaker_racetrack_Billboard_01"> 
+      <static>true</static>
       <include> 
         <uri>model://aws_robomaker_racetrack_Billboard_01</uri> 
       </include>  
       <pose frame="">4.32789 -14.8431 -2e-06 0 1e-06 1.56416</pose> 
     </model>  
+
+    <model name='Board_01_001'>
+      <static>true</static>    
+      <include>
+          <uri>model://aws_robomaker_residential_Board_01</uri>
+      </include>
+      <pose frame=''>2.779073 -5.392703 1.538173 0 -0 0</pose>
+    </model>
+
+    <model name='ChairA_01_001'>
+      <static>true</static>    
+      <include>
+          <uri>model://aws_robomaker_residential_ChairA_01</uri>
+      </include>
+      <pose frame=''>7.11516 0.209028 0.024685 1e-06 -0 -1.55607</pose>
+</model>
+<model name='ChairA_01_002'>
+      <static>true</static>    
+      <include>
+          <uri>model://aws_robomaker_residential_ChairA_01</uri>
+      </include>
+      <pose frame=''>6.25506 0.219468 0.011308 0 0 -1.50414</pose>
+</model>
+<model name='ChairA_01_003'>
+      <static>true</static>    
+      <include>
+          <uri>model://aws_robomaker_residential_ChairA_01</uri>
+      </include>
+      <pose frame=''>6.06678 1.68075 0.01 0 -0 1.56986</pose>
+</model>
+<model name='ChairA_01_004'>
+      <static>true</static>    
+      <include>
+          <uri>model://aws_robomaker_residential_ChairA_01</uri>
+      </include>
+      <pose frame=''>7.00277 1.67074 0 0 -0 1.52363</pose>
+</model>
+<model name='ChairA_01_005'>
+      <static>true</static>    
+      <include>
+          <uri>model://aws_robomaker_residential_ChairA_01</uri>
+      </include>
+      <pose frame=''>-8.270940 1.916650 0.036650 0 -0 0</pose>
+</model>
+
     <model name="aws_robomaker_racetrack_CrashworthBucket_01_00"> 
+      <static>true</static>
       <include> 
         <uri>model://aws_robomaker_racetrack_CrashworthBucket_01</uri> 
       </include>  
         <pose frame=''>-8.47522 4.09403 0.054 0 0 0</pose>
     </model>  
+
     <model name="aws_robomaker_racetrack_CrashworthBucket_01_01"> 
+      <static>true</static>
       <include> 
         <uri>model://aws_robomaker_racetrack_CrashworthBucket_01</uri> 
       </include>  
         <pose frame=''>-7.67012 3.67698 0.054 0 0 0</pose>
     </model>  
+
     <model name="aws_robomaker_racetrack_CrashworthBucket_01_02"> 
+      <static>true</static>
       <include> 
         <uri>model://aws_robomaker_racetrack_CrashworthBucket_01</uri> 
       </include>  
         <pose frame=''>-13.6708 -0.983538 0.054 0 0 0</pose>
     </model>  
+
     <model name="aws_robomaker_racetrack_CrashworthBucket_01_03"> 
       <include> 
         <uri>model://aws_robomaker_racetrack_CrashworthBucket_01</uri> 
       </include>  
         <pose frame=''>-13.6938 6.13266 0.054 0 0 0</pose>
     </model>  
+
     <model name="aws_robomaker_racetrack_CrashworthBucket_01_04"> 
       <include> 
         <uri>model://aws_robomaker_racetrack_CrashworthBucket_01</uri> 
