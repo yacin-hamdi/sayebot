@@ -48,7 +48,13 @@ def generate_launch_description():
         executable="create", 
         output="screen", 
         arguments=["-topic", "robot_description", 
-                   "-name", "sayebot"]
+                    "-name", "sayebot",
+                    "-x", "-2.0",
+                    "-y", "-15.0",
+                    "-z", "0.5"
+                   
+                   
+                   ]
     )
 
     
