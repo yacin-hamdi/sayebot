@@ -1,5 +1,5 @@
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, TimerAction
 from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
 from launch_ros.substitutions import FindPackageShare
 
@@ -25,13 +25,20 @@ def generate_launch_description():
         
     )
 
-    controller = IncludeLaunchDescription(
-        PathJoinSubstitution([
-            FindPackageShare("sayebot_controller"),
-            "launch", 
-            "controller.launch.py"
-        ])
+    controller = TimerAction(
+        period=10.0,
+
+        actions=[IncludeLaunchDescription(
+                    PathJoinSubstitution([
+                        FindPackageShare("sayebot_controller"),
+                        "launch", 
+                        "controller.launch.py"
+                    ])
+                )]
+
     )
+
+    
 
     joystick = IncludeLaunchDescription(
         PathJoinSubstitution([
@@ -41,9 +48,11 @@ def generate_launch_description():
         ])
     )
 
+    
+
     return LaunchDescription([
         gazebo, 
         rviz,
-        controller,
-        joystick
+        joystick, 
+        controller
     ])
