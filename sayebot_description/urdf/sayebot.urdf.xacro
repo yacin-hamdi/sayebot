@@ -224,4 +224,22 @@
         <origin xyz="0 0 0.22" rpy="0 0 0"/>
     </joint>
 
+    <link name="camera_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://sayebot_description/meshes/camera.STL" scale="0.5 0.5 0.5"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        <material name="dark">
+            <color rgba="0.8 0.8 0.8 1"></color>
+        </material>
+        </visual>
+    </link>
+
+    <joint name="camera_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="camera_link"/>
+        <origin xyz="0.09 0 0.1" rpy="0 0 0"/>
+    </joint>
+
 </robot>

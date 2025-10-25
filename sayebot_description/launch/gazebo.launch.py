@@ -1,12 +1,14 @@
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable, DeclareLaunchArgument
-from launch.substitutions import PathJoinSubstitution, PythonExpression, LaunchConfiguration
+from launch.substitutions import PathJoinSubstitution, PythonExpression, LaunchConfiguration, Command
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.actions import Node
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from ament_index_python.packages import get_package_share_directory
+from launch_ros.parameter_descriptions import ParameterValue
 from pathlib import Path
 import os
+
 
 def generate_launch_description():
 
@@ -16,6 +18,15 @@ def generate_launch_description():
     )
     world_name = LaunchConfiguration("world_name")
 
+    robot_description_arg = DeclareLaunchArgument(
+        name="robot_description", 
+        default_value=PathJoinSubstitution([
+                FindPackageShare("sayebot_description"), 
+                "urdf", 
+                "sayebot.urdf.xacro"
+            ])
+    )
+
     world_path = PathJoinSubstitution([
         FindPackageShare("sayebot_description"),
         "worlds", 
@@ -23,7 +34,7 @@ def generate_launch_description():
     ])
 
     
-    
+    robot_description = ParameterValue(Command(["xacro ", LaunchConfiguration("robot_description")]), value_type=str)
 
     resource_path = str(Path(get_package_share_directory("sayebot_description")).parent.resolve())
     resource_path += os.pathsep + os.path.join(get_package_share_directory("sayebot_description"), "models")
@@ -57,6 +68,16 @@ def generate_launch_description():
                    ]
     )
 
+    robot_state_publisher = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher", 
+        parameters=[
+            {"robot_description": robot_description}
+        ]
+
+    )
+
+
     
 
     gz_ros2_bridge = Node(
@@ -64,12 +85,15 @@ def generate_launch_description():
         executable="parameter_bridge", 
         arguments=[
             "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
-            "/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan"
+            "/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
+            "/camera@sensor_msgs/msg/Image[gz.msgs.Image"
         ]
     )
     return LaunchDescription([
         world_name_arg,
+        robot_description_arg,
         gazebo_resource_path,
+        robot_state_publisher,
         gazebo, 
         gz_spawn_entity, 
         gz_ros2_bridge
