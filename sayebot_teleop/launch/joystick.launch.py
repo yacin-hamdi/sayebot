@@ -21,7 +21,7 @@ def generate_launch_description():
         output="screen",
         parameters=[
             PathJoinSubstitution([
-                FindPackageShare("sayebot_controller"),
+                FindPackageShare("sayebot_teleop"),
                 "config",
                 "joy_teleop.yaml"
             ]),
@@ -35,7 +35,7 @@ def generate_launch_description():
         output="screen",
         parameters=[
             PathJoinSubstitution([
-                FindPackageShare("sayebot_controller"),
+                FindPackageShare("sayebot_teleop"),
                 "config",
                 "joy_config.yaml"
             ]),

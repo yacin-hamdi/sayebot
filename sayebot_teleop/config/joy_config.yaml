@@ -3,6 +3,8 @@ joystick:
     device_id: 0
     device_name: ""
     deadzone: 0.5
-    autorepeat_rate: 20.0
+    autorepeat_rate: 20
     sticky_buttons: false
     coalesce_interval_ms: 1
+
+    
