@@ -23,7 +23,7 @@ class LaneFollower(Node):
                                               "sayebot_controller/reference", 
                                               10)
         self.twist_stamped = TwistStamped()
-        self.linear_vel = 0.8
+        self.linear_vel = 0.1
         self.error = 0
         self.timer = self.create_timer(0.01, self.control_callback)
         
@@ -234,29 +234,7 @@ class LaneFollower(Node):
     def image_callback(self, msg: Image):
         frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
         h, w, _ = frame.shape
-        # roi = frame[int(h*0.5):, :]
-        # hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
-        # mask_white = cv2.inRange(hsv, (0, 0, 200), (180, 40, 255))
-        # # kernel = np.ones((5, 5), np.uint8)
-        # # mask_white = cv2.dilate(mask_white, kernel, iterations=1)
-
-        # contours, _ = cv2.findContours(mask_white, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        # if contours:
-        #     all_pts = np.vstack(contours).squeeze()
-
-        #     if len(all_pts) > 10:
-        #         vx, vy, x0, y0 = cv2.fitLine(all_pts, cv2.DIST_L2, 0, 0.01, 0.01)
-
-        #     h, w = mask_white.shape[:2]
-        #     y_bottom = h-1
-        #     x_bottom = int(x0 + (y_bottom - y0) * (vx / vy))
-
-        #     cv2.line(mask_white, 
-        #              (x_bottom, y_bottom), 
-        #              (int(x0 - 100 * vx), int(y0 - 100 * vy)), 
-        #              (0, 255, 0), 
-        #              2)
-        #     cv2.circle(mask_white, (x_bottom, y_bottom), 5, (0, 0, 255), -1)
+       
         sobel = self.abs_sobel_thres(frame, kernel=3, threshold=(10,100))
         mg = self.mag_gradient(frame, threshold=(70, 100))
         dir = self.dir_gradient(frame, threshold=(0.8, 1.3))
@@ -265,8 +243,12 @@ class LaneFollower(Node):
         binary_out = np.zeros_like(g)
         binary_out[((g == 255)|(c == 255))] = 255
 
-        warp_img, M, Minv = self.warp_corners(binary_out[:int(binary_out.shape[0]*0.6), :])
-        left_fit, right_fit, left_fit_m, right_fit_m, out_img = self.find_lanes(warp_img)
+        # cx = w // 2
+        # half_width = int(w * 0.1 / 2)
+        # binary_out[:, cx - half_width: cx + half_width] = 0
+
+        warp_img, M, Minv = self.warp_corners(binary_out[:int(binary_out.shape[0]*0.9), :])
+        left_fit, right_fit, left_fit_m, right_fit_m, lanes = self.find_lanes(warp_img)
         out_img = self.draw_rectangle(frame, warp_img, Minv, left_fit, right_fit)
 
         y_eval = h - 200
@@ -279,17 +261,17 @@ class LaneFollower(Node):
         
 
         vis = out_img.copy()
-        cv2.line(vis, (lane_center, y_eval), (lane_center, y_eval - 40), (0, 255, 0), 2)
-        cv2.line(vis, (image_center, y_eval), (image_center, y_eval - 40), (0, 0, 255), 2)
-        cv2.arrowedLine(vis, (image_center, y_eval - 60), (lane_center, y_eval-60), (255, 0, 0), 2, tipLength=0.2)
+        cv2.line(vis, (lane_center, y_eval+200), (lane_center, y_eval+200 - 40), (0, 255, 0), 2)
+        cv2.line(vis, (image_center, y_eval+200), (image_center, y_eval+200 - 40), (0, 0, 255), 2)
+        cv2.arrowedLine(vis, (image_center, y_eval+200 - 60), (lane_center, y_eval+200-60), (255, 0, 0), 2, tipLength=0.2)
 
         self.error = lane_center - image_center
 
         
         
-        cv2.imshow("vis", vis)
-        cv2.imshow("warp_img", binary_out[:int(binary_out.shape[0]*0.6), :])
-        # cv2.imshow("out", out_img)
+        cv2.imshow("out", vis[300:, :])
+        cv2.imshow("binary", binary_out[300:, :])
+        cv2.imshow("lanes", lanes[200:, :])
         # cv2.imshow("gray", g)
         # cv2.imshow("out", binary_out)
        
