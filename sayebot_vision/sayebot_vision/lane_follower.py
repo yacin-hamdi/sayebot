@@ -260,6 +260,20 @@ class LaneFollower(Node):
         left_fit, right_fit, left_fit_m, right_fit_m, out_img = self.find_lanes(warp_img)
         out_img = self.draw_rectangle(frame, warp_img, Minv, left_fit, right_fit)
 
+        y_eval = h
+        left_x = int(left_fit[0]*y_eval**2 + left_fit[1]*y_eval + left_fit[2])
+        right_x = int(right_fit[0]*y_eval**2 + right_fit[1]*y_eval + right_fit[2])
+
+        lane_center = int((left_x + right_x) / 2.0)
+        image_center = int(w // 2)
+
+        vis = out_img.copy()
+        cv2.line(vis, (lane_center, y_eval), (lane_center, y_eval - 40), (0, 255, 0), 2)
+        cv2.line(vis, (image_center, y_eval), (image_center, y_eval - 40), (0, 0, 255), 2)
+        cv2.arrowedLine(vis, (image_center, y_eval - 60), (lane_center, y_eval-60), (255, 0, 0), 2, tipLength=0.2)
+        
+        cv2.imshow("vis", vis)
+
 
 
 
