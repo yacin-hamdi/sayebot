@@ -18,30 +18,30 @@
 
         <visual>
             <geometry>
-                <mesh filename="package://sayebot_description/meshes/BaseReduced.dae"/>
+                <mesh filename="package://sayebot_description/meshes/BaseReduced.dae" scale="5 5 5"/>
             </geometry>
-            <origin xyz="0.1371 0 0" rpy="0 0 ${pi/2}"/>
+            <origin xyz="0.6855 0 0" rpy="0 0 ${pi/2}"/>
         </visual>
 
         <visual>
             <geometry>
-                    <mesh filename="package://sayebot_description/meshes/TopReduced.dae"/>
+                    <mesh filename="package://sayebot_description/meshes/TopReduced.dae" scale="5 5 5"/>
             </geometry>
-            <origin xyz="0.1371 0 0" rpy="0 0 ${pi/2}"/>
+            <origin xyz="0.6855 0 0" rpy="0 0 ${pi/2}"/>
         </visual>
 
         <collision>
             <geometry>
-                <box size="0.3 0.09 0.12"/>
+                <box size="1.5 0.45 0.6"/>
             </geometry>
-            <origin xyz="-0.03 0 0.06" rpy="0 0 0"/>
+            <origin xyz="-0.15 0 0.3" rpy="0 0 0"/>
         </collision>
     </link>
 
     <joint name="base_joint" type="fixed">
         <parent link="base_footprint"/>
         <child link="base_link"/>
-        <origin xyz="0 0 0.0115" rpy="0 0 0"/>
+        <origin xyz="0 0 0.0575" rpy="0 0 0"/>
     </joint>
 
     
@@ -57,13 +57,13 @@
 
         <visual>
             <geometry>
-                <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
+                <mesh filename="package://sayebot_description/meshes/Wheel.dae" scale="5 5 5"/>
             </geometry>
-            <origin xyz="0 -0.015 0" rpy="0 0 0"/>
+            <origin xyz="0 -0.075 0" rpy="0 0 0"/>
         </visual>
         <collision>
             <geometry>
-                <cylinder radius="0.0365" length="0.03"/>
+                <cylinder radius="0.1825" length="0.15"/>
             </geometry>
             <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
         </collision>
@@ -83,7 +83,7 @@
     <joint name="right_forward_steer_joint" type="revolute">
         <parent link="base_link"/>
         <child link="right_forward_steer_link"/>
-        <origin xyz="0.11 -0.09 0.0115" rpy="0 0 0"/>
+        <origin xyz="0.55 -0.45 0.0575" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
         <limit effort="5" lower="-0.5" upper="0.5" velocity="1.0"/>
     </joint>
@@ -106,13 +106,13 @@
 
         <visual>
             <geometry>
-                <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
+                <mesh filename="package://sayebot_description/meshes/Wheel.dae" scale="5 5 5"/>
             </geometry>
-            <origin xyz="0 -0.015 0" rpy="0 0 0"/>
+            <origin xyz="0 -0.075 0" rpy="0 0 0"/>
         </visual>
         <collision>
             <geometry>
-                <cylinder radius="0.0365" length="0.03"/>
+                <cylinder radius="0.1825" length="0.15"/>
             </geometry>
             <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
         </collision>
@@ -121,7 +121,7 @@
     <joint name="right_backward_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="right_backward_wheel_link"/>
-        <origin xyz="-0.115 -0.09 0.0115" rpy="0 0 0"/>
+        <origin xyz="-0.575 -0.45 0.0575" rpy="0 0 0"/>
         <axis xyz="0 1 0"/>
     </joint>
 
@@ -136,13 +136,13 @@
 
         <visual>
             <geometry>
-                <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
+                <mesh filename="package://sayebot_description/meshes/Wheel.dae" scale="5 5 5"/>
             </geometry>
-            <origin xyz="0 0.015 0" rpy="0 0 ${pi}"/>
+            <origin xyz="0 0.075 0" rpy="0 0 ${pi}"/>
         </visual>
         <collision>
             <geometry>
-                <cylinder radius="0.0365" length="0.03"/>
+                <cylinder radius="0.1825" length="0.15"/>
             </geometry>
             <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
         </collision>
@@ -164,7 +164,7 @@
     <joint name="left_forward_steer_joint" type="revolute">
         <parent link="base_link"/>
         <child link="left_forward_steer_link"/>
-        <origin xyz="0.11 0.09 0.0115" rpy="0 0 0"/>
+        <origin xyz="0.55 0.45 0.0575" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
         <limit effort="5" lower="-0.5" upper="0.5" velocity="1.0"/>
     </joint>
@@ -188,13 +188,13 @@
 
         <visual>
             <geometry>
-                <mesh filename="package://sayebot_description/meshes/Wheel.dae"/>
+                <mesh filename="package://sayebot_description/meshes/Wheel.dae" scale="5 5 5"/>
             </geometry>
-            <origin xyz="0 0.015 0" rpy="0 0 ${pi}"/>
+            <origin xyz="0 0.075 0" rpy="0 0 ${pi}"/>
         </visual>
         <collision>
             <geometry>
-                <cylinder radius="0.0365" length="0.03"/>
+                <cylinder radius="0.1825" length="0.15"/>
             </geometry>
             <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
         </collision>
@@ -203,16 +203,16 @@
     <joint name="left_backward_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="left_backward_wheel_link"/>
-        <origin xyz="-0.115 0.09 0.0115" rpy="0 0 0"/>
+        <origin xyz="-0.575 0.45 0.0575" rpy="0 0 0"/>
         <axis xyz="0 1 0"/>
     </joint>
 
-    <link name="laser_link">
+    <!-- <link name="laser_link">
         
 
         <visual>
             <geometry>
-                <mesh filename="package://sayebot_description/meshes/STL27L.dae"/>
+                <mesh filename="package://sayebot_description/meshes/STL27L.dae" scale="5 5 5"/>
             </geometry>
             <origin xyz="0 0 -0.09" rpy="0 0 ${pi}"/>
         </visual>
@@ -222,14 +222,14 @@
         <parent link="base_link"/>
         <child link="laser_link"/>
         <origin xyz="0 0 0.22" rpy="0 0 0"/>
-    </joint>
+    </joint> -->
 
     <link name="camera_link">
         <visual>
             <geometry>
-                <mesh filename="package://sayebot_description/meshes/camera.STL" scale="0.5 0.5 0.5"/>
+                <mesh filename="package://sayebot_description/meshes/camera.STL" scale="2.5 2.5 2.5"/>
             </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <origin xyz="-0.15 0 -0.4" rpy="0 0 0"/>
         <material name="dark">
             <color rgba="0.8 0.8 0.8 1"></color>
         </material>
@@ -239,7 +239,7 @@
     <joint name="camera_joint" type="fixed">
         <parent link="base_link"/>
         <child link="camera_link"/>
-        <origin xyz="0.09 0 0.1" rpy="0 0 0"/>
+        <origin xyz="0.65 0 0.9" rpy="0 0 0"/>
     </joint>
 
 </robot>
