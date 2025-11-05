@@ -3,6 +3,7 @@
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
+from geometry_msgs.msg import TwistStamped
 from cv_bridge import CvBridge
 import cv2
 import numpy as np
@@ -17,6 +18,14 @@ class LaneFollower(Node):
                                                    "/camera", 
                                                    self.image_callback,
                                                    10)
+
+        self.cmd_pub_ = self.create_publisher(TwistStamped, 
+                                              "sayebot_controller/reference", 
+                                              10)
+        self.twist_stamped = TwistStamped()
+        self.linear_vel = 0.8
+        self.error = 0
+        self.timer = self.create_timer(0.01, self.control_callback)
         
     
     def gray_threshold(self, img, threshold=(200, 255)):
@@ -260,32 +269,40 @@ class LaneFollower(Node):
         left_fit, right_fit, left_fit_m, right_fit_m, out_img = self.find_lanes(warp_img)
         out_img = self.draw_rectangle(frame, warp_img, Minv, left_fit, right_fit)
 
-        y_eval = h
+        y_eval = h - 200
         left_x = int(left_fit[0]*y_eval**2 + left_fit[1]*y_eval + left_fit[2])
         right_x = int(right_fit[0]*y_eval**2 + right_fit[1]*y_eval + right_fit[2])
 
         lane_center = int((left_x + right_x) / 2.0)
         image_center = int(w // 2)
 
+        
+
         vis = out_img.copy()
         cv2.line(vis, (lane_center, y_eval), (lane_center, y_eval - 40), (0, 255, 0), 2)
         cv2.line(vis, (image_center, y_eval), (image_center, y_eval - 40), (0, 0, 255), 2)
         cv2.arrowedLine(vis, (image_center, y_eval - 60), (lane_center, y_eval-60), (255, 0, 0), 2, tipLength=0.2)
+
+        self.error = lane_center - image_center
+
+        
         
         cv2.imshow("vis", vis)
-
-
-
-
-            
         cv2.imshow("warp_img", binary_out[:int(binary_out.shape[0]*0.6), :])
-        cv2.imshow("out", out_img)
+        # cv2.imshow("out", out_img)
         # cv2.imshow("gray", g)
         # cv2.imshow("out", binary_out)
        
 
         # cv2.imshow("frame", frame)
         cv2.waitKey(1)
+
+    def control_callback(self):
+        self.twist_stamped.header.stamp = self.get_clock().now().to_msg()
+        self.twist_stamped.header.frame_id = "base_link"
+        self.twist_stamped.twist.linear.x = self.linear_vel
+        self.twist_stamped.twist.angular.z = - self.error / 500.0
+        self.cmd_pub_.publish(self.twist_stamped)
 
 
 
